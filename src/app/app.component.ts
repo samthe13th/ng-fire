@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Database, listVal, onValue, push, ref, set } from '@angular/fire/database';
+import { Database, listVal, push, ref } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -14,7 +14,9 @@ export class AppComponent {
 
   constructor() {
     const items = ref(this.db, 'ng-fire/items');
-    this.items$ = listVal(items);
+    this.items$ = listVal(items).pipe(
+      tap((x) => {x})
+    )
   }
 
   addItem() {
