@@ -1,1 +1,78 @@
 /* You can add global styles to this file, and also import other style files */
+// COLORS
+:root {
+  --color_orange: #e99d00;
+  --color_yellow: #ffc802;
+  --color_purple: #8a6fcc;
+  --color_blue: #6ba0d1;
+  --color_blue-grey: #8b9baf;
+  --color_red: #ff6347;
+  --color_green: #3fb671;
+  --color_grey-1: #e8e8e8;
+  --color_grey-2: #d3d3d3;
+  --color_grey-3: #90959c;
+  --color_grey-4: #38404a;
+  --color_grey-5: #25292f;
+  --color_grey-6: #16191e;
+}
+
+
+body {
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+.monospace {
+  font-family: monospace;
+}
+
+.form-input {
+  width: 100%;
+  flex: 1;
+  min-width: 100px;
+  padding: 10px;
+  box-sizing: border-box;
+  min-height: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.app-inline-edit {
+  display: flex; 
+  flex-direction: column; 
+  align-items: flex-start;
+  width: 100%;
+  font-size: 18px;
+
+  &.monospace {
+    font-family: monospace;
+
+    .inline-view-input, 
+    .form-input {
+      &.input-edit {
+        font-family: monospace;
+      }
+    }
+  }
+
+  &.theme-dark {
+    .inline-view-input, 
+    .form-input {
+      background: #141926;
+      color: white;
+      line-height: 20px;
+      height: 20px;
+      border: none;
+
+      &.input-edit {
+        background: #364673;
+        border: solid 1px white;
+        border-style: none;
+        height: 40px;
+      }
+    }
+  }
+}

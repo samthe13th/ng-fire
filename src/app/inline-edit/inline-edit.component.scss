@@ -1,0 +1,78 @@
+.inline-label {
+  font-size: 20px;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.inline-edit {
+  position: relative;
+  width: 100%;
+  display: flex; 
+  align-items: flex-start;
+
+  pre {
+    margin-bottom: 0;
+    text-align: start;
+    max-height: 100px;
+    &:hover {
+        background: white;
+    }
+  }
+
+  > .action-button {
+      margin-left: 5px;
+  }
+}
+
+.inline-view-input {
+  cursor: text;
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  text-align: start;
+  padding: 10px;
+  overflow: auto;
+  width: 100%;
+  
+  &.code {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 13px;
+  }
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+}
+
+.inline-input {
+  width: 100%;
+  position: relative;
+  text-align: start;
+}
+
+.inline-edit-buttons {
+  display: flex; 
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 10px;
+
+  > .inline-edit-button:not(:last-child) {
+      margin-right: 5px;
+  }
+}
+
+.inline-edit-button {
+  width: 30px;
+  height: 30px;
+  background: var(--color_grey-2);
+  cursor: pointer;
+  color: white;
+  border-style: none;
+  
+  &.confirm {
+    background: var(--color_green)
+  }
+
+  &.cancel {
+    background: var(--color_blue-grey);
+  }
+}

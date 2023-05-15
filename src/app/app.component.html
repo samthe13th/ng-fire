@@ -1,6 +1,68 @@
-<button (click)="addItem()">Add</button>
-<ul>
-  <li class="text" *ngFor="let item of items$ | async">
-    {{item}}
-  </li>
-</ul>
+<div class="main" *ngIf="{ 
+  config: config$ | async,
+  karaokeUrl: karaokeUrl$ | async
+} as obs$">
+  <div class="rt-viewer" >
+    <ng-container *ngIf="admin || !admin && obs$.config?.showOpen; else landingPageTemplate">
+      <div class="stream-btns">
+        <ng-container *ngIf="!admin">
+          <button [class.active]="stream === 'dolby'" (click)="setStream('dolby')">Main</button>
+          <button [class.active]="stream === 'meshcast'" (click)="setStream('meshcast')">Backstage</button>
+          <!-- <button @click="mode = getMode()">Mode = {{mode}}</button> -->
+        </ng-container>
+      </div>
+      <div class="stream-wrapper" [class.duo]="admin">
+        <!-- <div class="stream">
+          <iframe src="https://viewer.millicast.com?streamId=BNfr94/BQFKN" allowfullscreen></iframe>
+        </div> -->
+        <div class="stream">
+          <ng-container *ngIf="obs$.karaokeUrl; else dolbyStreamTemplate">
+            <div class="vmix">
+              <iframe allow="camera *; microphone *" [attr.src]="obs$.karaokeUrl" allowfullscreen></iframe>
+            </div>
+          </ng-container>
+          <ng-template #dolbyStreamTemplate>
+            <iframe src="https://viewer.millicast.com?streamId=BNfr94/BQFKN" allowfullscreen></iframe>
+          </ng-template>
+        </div>
+  
+    
+        <div class="stream" [class.overlay]="!admin" [class.hide]="!admin && stream !== 'meshcast'">
+          <iframe 
+            src="https://vdo.ninja/?scene&room=BQFKN_Backstage&noaudio" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+      <div *ngIf="admin" class="admin-panel">
+        <ng-container>
+          <button (click)="toggleShowOpen(obs$?.config?.showOpen)">
+            {{ obs$?.config?.showOpen ? 'Close Show' : 'Open Show'}}
+          </button>
+          <div class="admin-form">
+            <div class="karaoke-user" *ngFor="let ku of karaokeUsers; let i = index">
+              <h3>{{ku?.name}}</h3>
+              <app-inline-edit
+                type="input"
+                theme="dark"
+                [copy]="false"
+                aria-placeholder="VMix URL"
+                [monospace]="true"
+                (valueChange)="onChangeKaraokeUrl($event, i)"
+                [(ngModel)]="karaokeUsers[i].url"
+              >
+              </app-inline-edit>
+            </div>
+          </div>
+  
+        </ng-container>
+      </div>
+    </ng-container>
+    <ng-template #landingPageTemplate>
+      Landing Page!
+    </ng-template>
+  </div>
+  <div class="rt-chat" *ngIf="chatUrl">
+    <iframe [attr.src]="chatUrl"></iframe>
+  </div>
+</div>
