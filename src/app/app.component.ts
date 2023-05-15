@@ -24,9 +24,9 @@ export class AppComponent implements OnInit {
   showOpen = false;
   chatUrl: any;
   karaokeUsers = [
-    { name: 'Karaoke 1', url: 'https://vmix.at/8RPPwf' },
-    { name: 'Karaoke 2', url: 'https://vmix.at/1tQSlm' },
-    { name: 'Karaoke 3', url: 'https://vmix.at/3qVlTU' }
+    { name: 'Karaoke 1', url: '' },
+    { name: 'Karaoke 2', url: '' },
+    { name: 'Karaoke 3', url: '' }
   ]
 
   constructor(
