@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   private db: Database = inject(Database);
   config$: Observable<any> = new BehaviorSubject<any>(null);
   karaokeUrl$: Observable<any> = new BehaviorSubject<any>(null);
+  karaokeUser$: Observable<any> = new BehaviorSubject<any>(null);
 
   isKaraokeUser = false;
   karaokeUser = 0;
@@ -24,10 +25,11 @@ export class AppComponent implements OnInit {
   room = "";
   showOpen = false;
   chatUrl: any;
+  tvOverlay = true;
   karaokeUsers = [
-    { name: 'Karaoke 1', url: '' },
-    { name: 'Karaoke 2', url: '' },
-    { name: 'Karaoke 3', url: '' }
+    { name: 'Karaoke 1', url: '', vmixEmbed: false },
+    { name: 'Karaoke 2', url: '', vmixEmbed: false },
+    { name: 'Karaoke 3', url: '', vmixEmbed: false }
   ]
 
   constructor(
@@ -67,11 +69,26 @@ export class AppComponent implements OnInit {
         map((user: any) => this.sanitizer.bypassSecurityTrustResourceUrl(user?.url)),
         tap((url) => console.log('urL: ', url))
       )
+      this.karaokeUser$ = objectVal(this.getRef(['karaokeUsers', (this.karaokeUser - 1).toString()])).pipe(
+        tap((user) => console.log({user})),
+        map((user: any) => ({ 
+          ...user,
+          url: this.sanitizer.bypassSecurityTrustResourceUrl(user?.url)
+        })),
+        tap((user) => console.log('user: ', user))
+      )
     }
   }
 
   onChangeKaraokeUrl(ev: any, index: number) {
     set(this.getRef(['karaokeUsers']), this.karaokeUsers)
+  }
+
+  onChangeKaraokeSwitch(ev: any, index: number) {
+    setTimeout(() => {
+      console.log('vmix: ', this.karaokeUsers[index])
+      set(this.getRef(['karaokeUsers']), this.karaokeUsers)
+    })
   }
 
   getRef(path: string[]) {

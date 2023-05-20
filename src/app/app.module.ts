@@ -12,6 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ClipboardModule } from 'ngx-clipboard';
 import { ToastrModule } from 'ngx-toastr';
 import { PickerModule } from "@ctrl/ngx-emoji-mart";
+import { UiSwitchModule } from 'ngx-ui-switch';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,9 @@ import { PickerModule } from "@ctrl/ngx-emoji-mart";
     FontAwesomeModule,
     ClipboardModule,
     PickerModule,
+    UiSwitchModule.forRoot({
+      size: 'small',
+    }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),

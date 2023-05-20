@@ -10,6 +10,33 @@ body {
   font-family: sans-serif;
 }
 
+.landing-logo {
+  width: 100%; 
+  height: 100%; 
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}
+
+.show-status {
+  font-size: 20px;
+  color: white;
+  font-family: sans-serif;
+  padding: 10px;
+
+  button {
+    margin-right: 10px;
+    background: white;
+  }
+
+  &.open {
+    background: rgb(0, 186, 0);
+  }
+  &.closed {
+    background: tomato;
+  }
+}
+
 .karaoke-user {
   color: white;
   
@@ -20,8 +47,8 @@ body {
   h3 {
     font-family: sans-serif;
     font-weight: 100;
+    margin-bottom: 0;
     margin-top: 0;
-    margin-bottom: 5px; 
   }
 
   input {
@@ -47,6 +74,17 @@ body {
   flex-direction: column;
   width: 100%;
   background: #2d3343;
+  position: relative;
+
+  .tv-overlay {
+    z-index: 1000;
+    pointer-events: none;
+    width: 100%; 
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 
   .vmix {
     width: 100%; 
@@ -79,13 +117,16 @@ body {
 }
 .stream-btns {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  font-weight: 200;
+  background: #2890ff;
+  border: 15px solid;
+  border-style: outset;
+  border-color: #0e82fc;
 }
-.stream-btns button {
-  padding: 10px;
-  font-size: 20px;
-  border: none;
-  border-radius: 0;
-}
+
 .stream-wrapper {
   position: relative;
   width: 100%; 
@@ -105,9 +146,6 @@ body {
 }
 .hide {
   display: none;
-}
-.active {
-  background: lightcoral;
 }
 #app {
   display: flex; 
