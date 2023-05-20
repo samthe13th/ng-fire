@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   karaokeUser = 0;
   stream = 'dolby';
   admin = null;
+  theme = null;
   room = "";
   showOpen = false;
   chatUrl: any;
@@ -33,7 +34,6 @@ export class AppComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute
     ) {
-
   }
 
   ngOnInit() {
@@ -41,10 +41,12 @@ export class AppComponent implements OnInit {
       this.room = params?.['room'] ?? null;
       this.admin = params?.['admin'] ?? null;
       this.karaokeUser = toNumber(params?.['karaoke']) ?? null;
+      this.theme = params?.['theme'] ?? "";
+
       let chatParams = "";
 
       if (this.room) {
-        chatParams = `?room=${this.room}&admin=${this.admin}`;
+        chatParams = `?room=${this.room}&admin=${this.admin}&theme=${this.theme}`;
         this.chatUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
           "https://chatroom-d4ab9.web.app" + chatParams
         );

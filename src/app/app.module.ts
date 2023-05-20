@@ -11,6 +11,7 @@ import { InlineEditComponent } from './inline-edit/inline-edit.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ClipboardModule } from 'ngx-clipboard';
 import { ToastrModule } from 'ngx-toastr';
+import { PickerModule } from "@ctrl/ngx-emoji-mart";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     FontAwesomeModule,
     ClipboardModule,
+    PickerModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
