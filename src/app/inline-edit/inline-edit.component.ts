@@ -153,7 +153,7 @@ import { ToastrService } from 'ngx-toastr';
     }
     
     onClipboardCopy(callback: any) {
-      // console.log("CLIP: ", callback.content)
+     console.log("CLIP: ", callback.content)
       this.toastr.success(callback.content, 'Copied to clipboard');
     }
 }

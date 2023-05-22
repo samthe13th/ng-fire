@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { toNumber } from 'lodash';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +35,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private sanitizer: DomSanitizer,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
     ) {
   }
 
@@ -57,6 +59,10 @@ export class AppComponent implements OnInit {
     })
   }
 
+  onClipboardCopy(callback: any) {
+    this.toastr.success(callback.content, 'Copied to clipboard');
+  }
+
   async setDatabaseProperties() {
     get(this.getRef(['karaokeUsers'])).then((users) => {
       if (users.exists()) {
@@ -66,15 +72,12 @@ export class AppComponent implements OnInit {
     if (this.karaokeUser > 0) {
       this.karaokeUrl$ = objectVal(this.getRef(['karaokeUsers', (this.karaokeUser - 1).toString()])).pipe(
         map((user: any) => this.sanitizer.bypassSecurityTrustResourceUrl(user?.url)),
-        tap((url) => console.log('urL: ', url))
       )
       this.karaokeUser$ = objectVal(this.getRef(['karaokeUsers', (this.karaokeUser - 1).toString()])).pipe(
-        tap((user) => console.log({user})),
         map((user: any) => ({ 
           ...user,
           url: this.sanitizer.bypassSecurityTrustResourceUrl(user?.url)
-        })),
-        tap((user) => console.log('user: ', user))
+        }))
       )
     }
   }
@@ -85,7 +88,6 @@ export class AppComponent implements OnInit {
 
   onChangeKaraokeSwitch(ev: any, index: number) {
     setTimeout(() => {
-      console.log('vmix: ', this.karaokeUsers[index])
       set(this.getRef(['karaokeUsers']), this.karaokeUsers)
     })
   }

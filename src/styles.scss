@@ -1,5 +1,28 @@
 @import 'node_modules/ngx-ui-switch/ui-switch.component.scss';
+@import url('https://fonts.cdnfonts.com/css/arcade-classic');
+@font-face {
+  font-family: 'Joystix';
+  src: url('./assets/fonts/joystix.ttf') format('truetype');
+  font-weight: normal;
+}
 
+@font-face {
+  font-family: 'Arcade Interlaced';
+  src: url('./assets/fonts/ARCADE_I.TTF') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Realpolitik Condensed';
+  src: url('./assets/fonts/realpolv2c.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Realpolitik Shadow';
+  src: url('./assets/fonts/realpolv2s.ttf') format('truetype');
+  font-weight: normal;
+}
 /* You can add global styles to this file, and also import other style files */
 // COLORS
 :root {
@@ -94,7 +117,7 @@ button {
 
 
 $bg: #333;
-$push-color: white;
+$push-color: rgb(242, 223, 174);
 
 $push-size: 100px;
 
@@ -105,12 +128,24 @@ $push-size: 100px;
   width: $push-size;
   height: $push-size;
   border: 0;
-  margin: 20px;
+  margin: 8px;
   outline: none;
+  color:rgba(black, 0.6);
   background-color: $push-color;
   border-radius: 50%;
   cursor: pointer;
   transition: box-shadow 200ms;
+}
+
+.backstage-link {
+  padding: 20px 0 ;
+
+  color: white; 
+  font-family: sans-serif;
+  h2 {
+    margin: 0;
+  
+  }
 }
 
 .push--flat {
