@@ -28,10 +28,10 @@
       </ng-container>
     </div>
 
-    <div class="stream-btns" *ngIf="!admin && !obs$.karaokeUser?.vmixEmbed">
+    <div class="stream-btns" *ngIf="!admin">
       <img class="speaker left" src="../assets/speaker.png"/>
 
-      <div class="cam-btns-wrapper" *ngIf="obs$.config?.showOpen">
+      <div class="cam-btns-wrapper">
         <div class="cam-btns">
           <button class="push--flat" [class.active]="stream === 'dolby'" (click)="setStream('dolby')">1</button>
           <button class="push--flat" [class.active]="stream === 'meshcast'" (click)="setStream('meshcast')">2</button> 

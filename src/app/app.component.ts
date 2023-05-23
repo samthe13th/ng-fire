@@ -54,7 +54,11 @@ export class AppComponent implements OnInit {
           "https://chatroom-d4ab9.web.app" + chatParams
         );
       }
-      this.config$ = objectVal(this.getRef(['config']));
+      this.config$ = objectVal(this.getRef(['config'])).pipe(tap(({ showOpen }) => {
+        if (showOpen) {
+          this.setStream('dolby');
+        }
+      }))
       this.setDatabaseProperties();
     })
   }
