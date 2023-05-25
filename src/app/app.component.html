@@ -6,7 +6,7 @@
   <div class="rt-viewer" >
     <div [class.tv-wrapper]="!isAdmin" [class.admin-wrapper]="isAdmin">
       <ng-container *ngIf="!isAdmin; else adminPanelTemplate">
-        <div class="speaker-tex left res hide-sm"></div>
+        <div class="speaker-tex left res hide-md"></div>
         <div class="tv-monitor-outer">
           <div class="tv-monitor-inner" [class.backstage]="stream === 'meshcast'">
             <div class="stream">
@@ -28,7 +28,7 @@
             </div>
           </div>
         </div>
-        <div class="speaker-tex right res hide-sm"></div>
+        <div class="speaker-tex right res hide-md"></div>
       </ng-container>
     </div>
 
@@ -36,11 +36,11 @@
       <img class="speaker left" src="../assets/speaker.png"/>
 
       <div class="cam-btns-wrapper">
+        <h1 class="res hide-short">CAMERA</h1>
         <div class="cam-btns">
           <button class="push--flat" [class.active]="stream === 'dolby'" (click)="setStream('dolby')">1</button>
           <button class="push--flat" [class.active]="stream === 'meshcast'" (click)="setStream('meshcast')">2</button> 
         </div> 
-        <h1 class="res hide-short">CAMERA</h1>
       </div>
 
       <div class="group right">
@@ -114,7 +114,7 @@
     </div>
   </ng-template>
 
-  <div class="rt-chat res hide-md" *ngIf="chatUrl">
+  <div class="rt-chat" *ngIf="chatUrl">
     <iframe [attr.src]="chatUrl"></iframe>
   </div>
 </div>
