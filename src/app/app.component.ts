@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   karaokeUrl$: Observable<any> = new BehaviorSubject<any>(null);
   karaokeUser$: Observable<any> = new BehaviorSubject<any>(null);
 
+  loaded = false;
   isKaraokeUser = false;
   karaokeUser = 0;
   stream = 'dolby';
@@ -54,8 +55,8 @@ export class AppComponent implements OnInit {
           "https://chatroom-d4ab9.web.app" + chatParams
         );
       }
-      this.config$ = objectVal(this.getRef(['config'])).pipe(tap(({ showOpen }) => {
-        if (showOpen) {
+      this.config$ = objectVal(this.getRef(['config'])).pipe(tap((config) => {
+        if (config?.showOpen) {
           this.setStream('dolby');
         }
       }))

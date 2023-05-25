@@ -41,6 +41,24 @@
   --color_grey-6: #16191e;
 }
 
+@media only screen and (max-width: 1000px) {
+  .res.hide-md {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .res.hide-sm {
+    display: none;
+  }
+}
+
+@media only screen and (max-height: 600px) {
+  .res.hide-short {
+    display: none;
+  }
+}
+
 .header-switch {
   display: flex;
   margin-bottom: 10px;
@@ -119,7 +137,7 @@ button {
 $bg: #333;
 $push-color: rgb(242, 223, 174);
 
-$push-size: 100px;
+$push-size: 80px;
 
 [class*="push"] {
   position: relative;

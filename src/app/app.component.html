@@ -6,7 +6,7 @@
   <div class="rt-viewer" >
     <div [class.tv-wrapper]="!admin" [class.admin-wrapper]="admin">
       <ng-container *ngIf="!admin; else adminPanelTemplate">
-        <div class="speaker-tex left"></div>
+        <div class="speaker-tex left res hide-sm"></div>
         <div class="tv-monitor-outer">
           <div class="tv-monitor-inner" [class.backstage]="stream === 'meshcast'">
             <div class="stream">
@@ -16,15 +16,15 @@
   
               <ng-template #landingPageTemplate>
                 <div class="landing-logo">
-                  <div>Welcome!</div>
-                  <img loop="infinite"  src="../assets/spin_text.gif">
-                  <div>The  show  will  be  begin  shortly!</div>
+                  <!-- <img loop="infinite"  src="../assets/new_logo.gif"> -->
+                  <!-- <div>The  show  will</div>
+                  <div>be  begin  shortly!</div> -->
                 </div>
               </ng-template>
             </div>
           </div>
         </div>
-        <div class="speaker-tex right"></div>
+        <div class="speaker-tex right res hide-sm"></div>
       </ng-container>
     </div>
 
@@ -36,7 +36,7 @@
           <button class="push--flat" [class.active]="stream === 'dolby'" (click)="setStream('dolby')">1</button>
           <button class="push--flat" [class.active]="stream === 'meshcast'" (click)="setStream('meshcast')">2</button> 
         </div> 
-        <h1>CAMERA</h1>
+        <h1 class="res hide-short">CAMERA</h1>
       </div>
 
       <div class="group right">
@@ -107,7 +107,7 @@
     </div>
   </ng-template>
 
-  <div class="rt-chat" *ngIf="chatUrl">
+  <div class="rt-chat res hide-md" *ngIf="chatUrl">
     <iframe [attr.src]="chatUrl"></iframe>
   </div>
 </div>
