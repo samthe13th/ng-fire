@@ -47,6 +47,26 @@ body {
   }
 }
 
+.landing {
+  background: #1f00ff;
+  flex-direction: column;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 10px;
+
+  .bottom-text {
+    font-family: "Arcade Interlaced", sans-serif;
+    font-size: 20px;
+    color: #1cd2ff;
+    padding-bottom: 40px;
+  }
+}
+
 .landing-logo {
   background-image: url('../assets/new_logo.gif');
   width: 100%;
@@ -56,15 +76,8 @@ body {
   background-repeat: no-repeat;
   display: flex;
   overflow: hidden;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: #1cd2ff;
-  text-align: center;
-  font-size: 20px;
   box-sizing: border-box;
   border-radius: 10px;
-  font-family: "Arcade Interlaced", sans-serif;
 
   img {
     width: 100%;
@@ -304,13 +317,14 @@ x
 .stream {
   width: 100%;
   height: 100%;
-  background: #1f00ff;
   border-radius: 10px;
+  background: black;
 
   iframe {
     border-radius: 10px;
   }
 }
+
 .overlay {
   position: absolute;
   top: 0;

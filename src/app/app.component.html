@@ -11,14 +11,18 @@
           <div class="tv-monitor-inner" [class.backstage]="stream === 'meshcast'">
             <div class="stream">
               <ng-container *ngIf="obs$.config?.showOpen; else landingPageTemplate">
-                <ng-container  *ngTemplateOutlet="streamsTemplate"></ng-container>
+                <ng-container *ngTemplateOutlet="streamsTemplate"></ng-container>
               </ng-container>
   
               <ng-template #landingPageTemplate>
-                <div class="landing-logo">
-                  <!-- <img loop="infinite"  src="../assets/new_logo.gif"> -->
-                  <!-- <div>The  show  will</div>
-                  <div>be  begin  shortly!</div> -->
+                <div class="landing">
+                  <div class="landing-logo">
+                    <!-- <img loop="infinite"  src="../assets/new_logo.gif"> -->
+                  </div>
+                  <div class="bottom-text" >
+                    <div>The  show  will</div>
+                    <div>be  begin  shortly!</div>
+                  </div>
                 </div>
               </ng-template>
             </div>
