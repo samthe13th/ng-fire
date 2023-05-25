@@ -4,8 +4,8 @@
   karaokeUser: karaokeUser$ | async
 } as obs$">
   <div class="rt-viewer" >
-    <div [class.tv-wrapper]="!admin" [class.admin-wrapper]="admin">
-      <ng-container *ngIf="!admin; else adminPanelTemplate">
+    <div [class.tv-wrapper]="!isAdmin" [class.admin-wrapper]="isAdmin">
+      <ng-container *ngIf="!isAdmin; else adminPanelTemplate">
         <div class="speaker-tex left res hide-sm"></div>
         <div class="tv-monitor-outer">
           <div class="tv-monitor-inner" [class.backstage]="stream === 'meshcast'">
@@ -32,7 +32,7 @@
       </ng-container>
     </div>
 
-    <div class="stream-btns" *ngIf="!admin">
+    <div class="stream-btns" *ngIf="!isAdmin">
       <img class="speaker left" src="../assets/speaker.png"/>
 
       <div class="cam-btns-wrapper">
@@ -62,7 +62,7 @@
           <iframe src="https://viewer.millicast.com?streamId=BNfr94/BQFKN" allowfullscreen></iframe>
         </ng-template>
     
-        <div class="stream" [class.overlay]="!admin" [class.hide]="!admin && stream !== 'meshcast'">
+        <div class="stream" [class.overlay]="!isAdmin" [class.hide]="!isAdmin && stream !== 'meshcast'">
           <iframe 
             src="https://vdo.ninja/?scene&room=BQFKN_Backstage&noaudio" 
             allowfullscreen>
@@ -74,7 +74,10 @@
   <ng-template #adminPanelTemplate>
     <div class="admin-panel">
       <ng-component *ngTemplateOutlet="streamsTemplate"></ng-component>
-      <div class="show-status" [class.open]="obs$?.config?.showOpen" [class.closed]="!obs$?.config?.showOpen">
+      <div 
+        class="show-status" 
+        [class.open]="obs$?.config?.showOpen" 
+        [class.closed]="!obs$?.config?.showOpen">
         <button (click)="toggleShowOpen(obs$?.config?.showOpen)">
           {{ obs$?.config?.showOpen ? 'Close Show' : 'Open Show'}}
         </button>
