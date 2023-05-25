@@ -84,9 +84,9 @@
         <em>{{ obs$?.config?.showOpen ? 'Show is Open!' : 'Show is Closed'}}</em>
       </div>
   
-      <div class="backstage-link">
-        <h2>Backstage Camera</h2>
-        <div>https://vdo.ninja/?room=BQFKN_Backstage&push=cam1&meshcast&mute&clean</div>
+      <div class="backstage-cam">
+        <h3>Backstage Camera</h3>
+        <div class="backstage-link">https://vdo.ninja/?room=BQFKN_Backstage&push=cam1&meshcast&mute&clean</div>
       </div>
   
       <div class="admin-form">
@@ -98,6 +98,7 @@
               (valueChange)="onChangeKaraokeSwitch($event, i)"
               [(ngModel)]="karaokeUsers[i].vmixEmbed">
             </ui-switch>
+            <div class="backstage-link">www.bqfkn.art/?k={{ku?.id}}</div>
           </div>
           <app-inline-edit
             type="input"

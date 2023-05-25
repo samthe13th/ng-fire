@@ -30,16 +30,20 @@ export class AppComponent implements OnInit {
   adminId = 'thebqfknadmin';
   isAdmin = false;
 
+  k1 = '2faf2Q3Jk';
+  k2 = '93jfks9oF';
+  k3 = '3jfkasdf3';
+
   karaokeIds: {[key: string]: number} = {
-    '2faf2Q3Jk': 0,
-    '93jfks9oF': 1,
-    '3jfkasdf3': 2
+    [this.k1]: 0,
+    [this.k2]: 1,
+    [this.k3]: 2
   }
 
   karaokeUsers = [
-    { name: 'Karaoke 1', url: '', vmixEmbed: false },
-    { name: 'Karaoke 2', url: '', vmixEmbed: false },
-    { name: 'Karaoke 3', url: '', vmixEmbed: false }
+    { name: 'Karaoke 1', id: this.k1, url: '', vmixEmbed: false },
+    { name: 'Karaoke 2', id: this.k2, url: '', vmixEmbed: false },
+    { name: 'Karaoke 3', id: this.k3, url: '', vmixEmbed: false }
   ]
 
   constructor(
@@ -54,6 +58,7 @@ export class AppComponent implements OnInit {
       this.isAdmin = params?.['admin'] === this.adminId;
       this.karaokeUser = this.getKaraokeUser(params?.['k']);
       let chatParams = `?room=${this.room}&theme=${this.theme}`;
+      console.log('k: ', this.karaokeUser)
 
       if (this.isAdmin) {
         chatParams += `&admin=${this.adminId}`
@@ -84,11 +89,11 @@ export class AppComponent implements OnInit {
         this.karaokeUsers = users.val();
       }
     })
-    if (this.karaokeUser > 0) {
-      this.karaokeUrl$ = objectVal(this.getRef(['karaokeUsers', (this.karaokeUser - 1).toString()])).pipe(
+    if (this.karaokeUser !== undefined) {
+      this.karaokeUrl$ = objectVal(this.getRef(['karaokeUsers', (this.karaokeUser).toString()])).pipe(
         map((user: any) => this.sanitizer.bypassSecurityTrustResourceUrl(user?.url)),
       )
-      this.karaokeUser$ = objectVal(this.getRef(['karaokeUsers', (this.karaokeUser - 1).toString()])).pipe(
+      this.karaokeUser$ = objectVal(this.getRef(['karaokeUsers', (this.karaokeUser).toString()])).pipe(
         map((user: any) => ({ 
           ...user,
           url: this.sanitizer.bypassSecurityTrustResourceUrl(user?.url)

@@ -41,7 +41,7 @@
   --color_grey-6: #16191e;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1200px) {
   .res.hide-md {
     display: none;
   }
@@ -64,7 +64,7 @@
   margin-bottom: 10px;
   align-items: center;
 
-  > h3 {
+  > * {
     margin: 0;
     margin-right: 10px;
   }
@@ -121,10 +121,12 @@ button {
       border: none;
 
       &.input-edit {
-        background: #364673;
-        border: solid 1px white;
+        background: #648af4;
+        border: solid;
         border-style: none;
         height: 40px;
+        font-size: 16px;
+        font-family: monospace;
       }
     }
   }
@@ -155,14 +157,28 @@ $push-size: 80px;
   transition: box-shadow 200ms;
 }
 
-.backstage-link {
-  padding: 20px 0 ;
+.backstage-cam {
+  margin-top: 20px;
+  font-size: 20px;
+  color: white;
+  font-family: sans-serif;
+  padding-bottom: 20px;
 
+  h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+}
+
+.backstage-link {
   color: white; 
   font-family: sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 200;
+
   h2 {
     margin: 0;
-  
   }
 }
 
