@@ -83,6 +83,10 @@ button {
   font-family: monospace;
 }
 
+.flex-row {
+  display: flex;
+}
+
 .form-input {
   width: 100%;
   flex: 1;

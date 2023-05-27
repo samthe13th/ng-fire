@@ -60,7 +60,7 @@
           </ng-container>
           
           <ng-template #dolbyStreamTemplate>
-            <iframe src="https://viewer.millicast.com?streamId=BNfr94/BQFKN" allowfullscreen></iframe>
+            <iframe style="border-radius: 10px" src="https://viewer.millicast.com?streamId=BNfr94/BQFKN" allowfullscreen></iframe>
           </ng-template>
       
           <div class="stream" [class.overlay]="!isAdmin" [class.hide]="!isAdmin && stream !== 'meshcast'">
@@ -103,29 +103,32 @@
           <div class="backstage-link">https://vdo.ninja/?room=BQFKN_Backstage&push=cam1&meshcast&mute&clean</div>
         </div>
     
-        <div class="admin-form">
-          <div class="karaoke-user" *ngFor="let ku of karaokeUsers; let i = index">
-            <div class="header-switch">
-              <h3>{{ku?.name}}</h3>          
-              <ui-switch 
-                class="flex-row" 
-                (valueChange)="onChangeKaraokeSwitch($event, i)"
-                [(ngModel)]="karaokeUsers[i].vmixEmbed">
-              </ui-switch>
-              <div class="backstage-link">www.bqfkn.art/?k={{ku?.id}}</div>
+        <div class="flex-row">
+          <div class="admin-form">
+            <div class="karaoke-user" *ngFor="let ku of karaokeUsers; let i = index">
+              <div class="header-switch">
+                <h3>{{ku?.name}}</h3>          
+                <ui-switch 
+                  class="flex-row" 
+                  (valueChange)="onChangeKaraokeSwitch($event, i)"
+                  [(ngModel)]="karaokeUsers[i].vmixEmbed">
+                </ui-switch>
+                <div class="backstage-link">www.bqfkn.art/?k={{ku?.id}}<span *ngIf="!obs$?.config?.showVisible">&testUser=1</span></div>
+              </div>
+              <app-inline-edit
+                type="input"
+                theme="dark"
+                [copy]="false"
+                aria-placeholder="VMix URL"
+                [monospace]="true"
+                (valueChange)="onChangeKaraokeUrl($event, i)"
+                [(ngModel)]="karaokeUsers[i].url"
+              >
+              </app-inline-edit>
             </div>
-            <app-inline-edit
-              type="input"
-              theme="dark"
-              [copy]="false"
-              aria-placeholder="VMix URL"
-              [monospace]="true"
-              (valueChange)="onChangeKaraokeUrl($event, i)"
-              [(ngModel)]="karaokeUsers[i].url"
-            >
-            </app-inline-edit>
           </div>
         </div>
+
       </div>
     </ng-template>
   
