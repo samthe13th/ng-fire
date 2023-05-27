@@ -10,6 +10,11 @@ body {
   font-family: sans-serif;
 }
 
+.flower-icon {
+  margin-right: 5px;
+  color: purple;
+}
+
 .cam-btns-wrapper {
   h1 {
     font-size: 20px;
@@ -162,12 +167,48 @@ body {
     height: 100%;
   }
 }
+
+.pins {
+  display: flex; 
+  background: white;
+  padding: 20px;
+  font-family: sans-serif;
+  flex-direction: column;
+  font-family: sans-serif;
+  border-bottom: solid 1px;
+
+  a {
+    width: 100%;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    color: purple;
+    padding: 5px;
+    border-radius: 10px;
+
+    .flower-icon,
+    .flower-icon:hover {
+      text-decoration: none;
+    }
+    
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    &:hover {
+      background: whitesmoke;
+    }
+  }
+}
+
 .rt-chat {
   display: flex; 
+  flex-direction: column;
   height: 100%; 
   width: 350px;
   flex-shrink: 0;
   border-left: solid 4px;
+
   @media only screen and (max-width: 1000px) {
     display: none;
   }
@@ -206,7 +247,6 @@ body {
   background-image: url('../assets/flowers.jpg');
   background-repeat: repeat;
   background-size: cover;
-  filter: saturate(0.6);
   padding: 10px;
 
   .coin-slot {
