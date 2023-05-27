@@ -71,6 +71,7 @@
 }
 
 body {
+  background: black;
   margin: 0;
 }
 
@@ -167,6 +168,13 @@ $push-size: 80px;
   h3 {
     margin-top: 0;
     margin-bottom: 5px;
+  }
+}
+
+.show-status-btns {
+  display: flex;
+  > *:not(:last-child) {
+    margin-right: 10px;
   }
 }
 

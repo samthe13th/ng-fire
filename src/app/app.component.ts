@@ -1,10 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Database, get, objectVal, ref, set } from '@angular/fire/database';
+import { Database, get, objectVal, ref, set, update } from '@angular/fire/database';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { toNumber } from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -18,6 +17,7 @@ export class AppComponent implements OnInit {
   karaokeUrl$: Observable<any> = new BehaviorSubject<any>(null);
   karaokeUser$: Observable<any> = new BehaviorSubject<any>(null);
 
+  landingScreen = false;
   loaded = false;
   isKaraokeUser = false;
   karaokeUser = 0;
@@ -25,10 +25,12 @@ export class AppComponent implements OnInit {
   theme = 'karaoke';
   room = "bqfkn_show";
   showOpen = false;
+  showVisible = false;
   chatUrl: any;
   tvOverlay = true;
   adminId = 'thebqfknadmin';
   isAdmin = false;
+  testUser = false;
 
   k1 = '2faf2Q3Jk';
   k2 = '93jfks9oF';
@@ -56,9 +58,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.isAdmin = params?.['admin'] === this.adminId;
+      this.testUser = params?.['testUser'] === '1';
       this.karaokeUser = this.getKaraokeUser(params?.['k']);
       let chatParams = `?room=${this.room}&theme=${this.theme}`;
-      console.log('k: ', this.karaokeUser)
+      console.log('testUser', params, this.testUser)
 
       if (this.isAdmin) {
         chatParams += `&admin=${this.adminId}`
@@ -118,7 +121,11 @@ export class AppComponent implements OnInit {
   }
 
   toggleShowOpen(value: boolean) {
-    set(this.getRef(['config']), { showOpen: !value });
+    update(this.getRef(['config']), { showOpen: !value });
+  };
+
+  toggleShowVisible(value: boolean) {
+    update(this.getRef(['config']), { showVisible: !value });
   };
 
   setStream(stream: string) {

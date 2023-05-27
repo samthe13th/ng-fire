@@ -3,119 +3,138 @@
   karaokeUrl: karaokeUrl$ | async,
   karaokeUser: karaokeUser$ | async
 } as obs$">
-  <div class="rt-viewer" >
-    <div [class.tv-wrapper]="!isAdmin" [class.admin-wrapper]="isAdmin">
-      <ng-container *ngIf="!isAdmin; else adminPanelTemplate">
-        <div class="speaker-tex left res hide-md"></div>
-        <div class="tv-monitor-outer">
-          <div class="tv-monitor-inner" [class.backstage]="stream === 'meshcast'">
-            <div class="stream">
-              <ng-container *ngIf="obs$.config?.showOpen; else landingPageTemplate">
-                <ng-container *ngTemplateOutlet="streamsTemplate"></ng-container>
-              </ng-container>
-  
-              <ng-template #landingPageTemplate>
-                <div class="landing">
-                  <div class="landing-logo">
-                    <!-- <img loop="infinite"  src="../assets/new_logo.gif"> -->
+  <ng-container *ngIf="(isAdmin || testUser || obs$?.config?.showVisible); else hiddenShowTemplate">
+    <div class="rt-viewer" >
+      <div [class.tv-wrapper]="!isAdmin" [class.admin-wrapper]="isAdmin">
+        <ng-container *ngIf="!isAdmin; else adminPanelTemplate">
+          <div class="speaker-tex left res hide-md"></div>
+          <div class="tv-monitor-outer">
+            <div class="tv-monitor-inner" [class.backstage]="stream === 'meshcast'">
+              <div class="stream">
+                <ng-container *ngIf="obs$.config?.showOpen; else landingPageTemplate">
+                  <ng-container *ngTemplateOutlet="streamsTemplate"></ng-container>
+                </ng-container>
+    
+                <ng-template #landingPageTemplate>
+                  <div class="landing">
+                    <div class="landing-logo">
+                      <!-- <img loop="infinite"  src="../assets/new_logo.gif"> -->
+                    </div>
+                    <div class="bottom-text" >
+                      <div>The  show  will</div>
+                      <div>begin  shortly!</div>
+                    </div>
                   </div>
-                  <div class="bottom-text" >
-                    <div>The  show  will</div>
-                    <div>begin  shortly!</div>
-                  </div>
-                </div>
-              </ng-template>
+                </ng-template>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="speaker-tex right res hide-md"></div>
-      </ng-container>
-    </div>
-
-    <div class="stream-btns" *ngIf="!isAdmin">
-      <img class="speaker left" src="../assets/speaker.png"/>
-
-      <div class="cam-btns-wrapper">
-        <h1 class="res hide-short">CAMERA</h1>
-        <div class="cam-btns">
-          <button class="push--flat" [class.active]="stream === 'dolby'" (click)="setStream('dolby')">1</button>
-          <button class="push--flat" [class.active]="stream === 'meshcast'" (click)="setStream('meshcast')">2</button> 
-        </div> 
-      </div>
-
-      <div class="group right">
-        <img class="coin-slot" src="../assets/coin-slot.png"/>
-        <img class="speaker" src="../assets/speaker.png"/>
-      </div>
-    </div>
-  </div>
-
-  <ng-template #streamsTemplate>
-     <div class="streams">
-        <ng-container *ngIf="obs$?.karaokeUser?.vmixEmbed; else dolbyStreamTemplate">
-          <div class="vmix">
-            <iframe allow="camera *; microphone *" [attr.src]="obs$?.karaokeUser?.url" allowfullscreen></iframe>
-          </div>
+          <div class="speaker-tex right res hide-md"></div>
         </ng-container>
-        
-        <ng-template #dolbyStreamTemplate>
-          <iframe src="https://viewer.millicast.com?streamId=BNfr94/BQFKN" allowfullscreen></iframe>
-        </ng-template>
-    
-        <div class="stream" [class.overlay]="!isAdmin" [class.hide]="!isAdmin && stream !== 'meshcast'">
-          <iframe 
-            src="https://vdo.ninja/?scene&room=BQFKN_Backstage&noaudio" 
-            allowfullscreen>
-          </iframe>
+      </div>
+  
+      <div class="stream-btns" *ngIf="!isAdmin">
+        <img class="speaker left" src="../assets/speaker.png"/>
+  
+        <div class="cam-btns-wrapper">
+          <h1 class="res hide-short">CAMERA</h1>
+          <div class="cam-btns">
+            <button class="push--flat" [class.active]="stream === 'dolby'" (click)="setStream('dolby')">1</button>
+            <button class="push--flat" [class.active]="stream === 'meshcast'" (click)="setStream('meshcast')">2</button> 
+          </div> 
         </div>
-     </div>
-  </ng-template>
-
-  <ng-template #adminPanelTemplate>
-    <div class="admin-panel">
-      <ng-component *ngTemplateOutlet="streamsTemplate"></ng-component>
-      <div 
-        class="show-status" 
-        [class.open]="obs$?.config?.showOpen" 
-        [class.closed]="!obs$?.config?.showOpen">
-        <button (click)="toggleShowOpen(obs$?.config?.showOpen)">
-          {{ obs$?.config?.showOpen ? 'Close Show' : 'Open Show'}}
-        </button>
-        <em>{{ obs$?.config?.showOpen ? 'Show is Open!' : 'Show is Closed'}}</em>
-      </div>
   
-      <div class="backstage-cam">
-        <h3>Backstage Camera</h3>
-        <div class="backstage-link">https://vdo.ninja/?room=BQFKN_Backstage&push=cam1&meshcast&mute&clean</div>
-      </div>
-  
-      <div class="admin-form">
-        <div class="karaoke-user" *ngFor="let ku of karaokeUsers; let i = index">
-          <div class="header-switch">
-            <h3>{{ku?.name}}</h3>          
-            <ui-switch 
-              class="flex-row" 
-              (valueChange)="onChangeKaraokeSwitch($event, i)"
-              [(ngModel)]="karaokeUsers[i].vmixEmbed">
-            </ui-switch>
-            <div class="backstage-link">www.bqfkn.art/?k={{ku?.id}}</div>
-          </div>
-          <app-inline-edit
-            type="input"
-            theme="dark"
-            [copy]="false"
-            aria-placeholder="VMix URL"
-            [monospace]="true"
-            (valueChange)="onChangeKaraokeUrl($event, i)"
-            [(ngModel)]="karaokeUsers[i].url"
-          >
-          </app-inline-edit>
+        <div class="group right">
+          <img class="coin-slot" src="../assets/coin-slot.png"/>
+          <img class="speaker" src="../assets/speaker.png"/>
         </div>
       </div>
     </div>
-  </ng-template>
-
-  <div class="rt-chat" *ngIf="chatUrl">
-    <iframe [attr.src]="chatUrl"></iframe>
-  </div>
+  
+    <ng-template #streamsTemplate>
+       <div class="streams">
+          <ng-container *ngIf="obs$?.karaokeUser?.vmixEmbed; else dolbyStreamTemplate">
+            <div class="vmix">
+              <iframe allow="camera *; microphone *" [attr.src]="obs$?.karaokeUser?.url" allowfullscreen></iframe>
+            </div>
+          </ng-container>
+          
+          <ng-template #dolbyStreamTemplate>
+            <iframe src="https://viewer.millicast.com?streamId=BNfr94/BQFKN" allowfullscreen></iframe>
+          </ng-template>
+      
+          <div class="stream" [class.overlay]="!isAdmin" [class.hide]="!isAdmin && stream !== 'meshcast'">
+            <iframe 
+              src="https://vdo.ninja/?scene&room=BQFKN_Backstage&noaudio" 
+              allowfullscreen>
+            </iframe>
+          </div>
+       </div>
+    </ng-template>
+  
+    <ng-template #adminPanelTemplate>
+      <div class="admin-panel">
+        <ng-component *ngTemplateOutlet="streamsTemplate"></ng-component>
+  
+        <div class="show-status-btns">
+          <div 
+            class="show-status" 
+            [class.visible]="obs$?.config?.showVisible" 
+            [class.hidden]="!obs$?.config?.showVisible">
+            <button (click)="toggleShowVisible(obs$?.config?.showVisible)">
+              {{ obs$?.config?.showVisible? 'Hide Show' : 'Make Visible'}}
+            </button>
+            <em>{{ obs$?.config?.showVisible ? 'Show is Visible!' : 'Show is Hidden'}}</em>
+          </div>
+  
+          <div 
+            class="show-status" 
+            [class.open]="obs$?.config?.showOpen" 
+            [class.closed]="!obs$?.config?.showOpen">
+            <button (click)="toggleShowOpen(obs$?.config?.showOpen)">
+              {{ obs$?.config?.showOpen ? 'Close Show' : 'Open Show'}}
+            </button>
+            <em>{{ obs$?.config?.showOpen ? 'Show is Open!' : 'Show is Closed'}}</em>
+          </div>
+        </div>
+  
+        <div class="backstage-cam">
+          <h3>Backstage Camera</h3>
+          <div class="backstage-link">https://vdo.ninja/?room=BQFKN_Backstage&push=cam1&meshcast&mute&clean</div>
+        </div>
+    
+        <div class="admin-form">
+          <div class="karaoke-user" *ngFor="let ku of karaokeUsers; let i = index">
+            <div class="header-switch">
+              <h3>{{ku?.name}}</h3>          
+              <ui-switch 
+                class="flex-row" 
+                (valueChange)="onChangeKaraokeSwitch($event, i)"
+                [(ngModel)]="karaokeUsers[i].vmixEmbed">
+              </ui-switch>
+              <div class="backstage-link">www.bqfkn.art/?k={{ku?.id}}</div>
+            </div>
+            <app-inline-edit
+              type="input"
+              theme="dark"
+              [copy]="false"
+              aria-placeholder="VMix URL"
+              [monospace]="true"
+              (valueChange)="onChangeKaraokeUrl($event, i)"
+              [(ngModel)]="karaokeUsers[i].url"
+            >
+            </app-inline-edit>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  
+    <div class="rt-chat" *ngIf="chatUrl">
+      <iframe [attr.src]="chatUrl"></iframe>
+    </div>
+  </ng-container>
 </div>
+
+<ng-template #hiddenShowTemplate>
+  <div class="landing-logo"></div>
+</ng-template>
