@@ -171,32 +171,28 @@ body {
 .pins {
   display: flex; 
   background: white;
-  padding: 20px;
-  font-family: sans-serif;
   flex-direction: column;
-  font-family: sans-serif;
-  border-bottom: solid 1px;
+  font-family: 'Arcade Interlaced';
+  background: black;
+  color: white;
 
   a {
     width: 100%;
     text-decoration: none;
-    color: black;
-    font-size: 20px;
-    color: purple;
-    padding: 5px;
-    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    padding: 10px;
+    line-height: 20px;
 
     .flower-icon,
     .flower-icon:hover {
+      color: white;
+      font-size: 24px;
       text-decoration: none;
-    }
-    
-    &:not(:last-child) {
-      margin-bottom: 10px;
     }
 
     &:hover {
-      background: whitesmoke;
+      background: #3f4093;
     }
   }
 }

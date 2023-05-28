@@ -13,6 +13,24 @@
 }
 
 @font-face {
+  font-family: 'Arcade Rounded';
+  src: url('./assets/fonts/ARCADE_R.TTF') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Joystix';
+  src: url('./assets/fonts/joystix.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Spline';
+  src: url('./assets/fonts/spline.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
   font-family: 'Realpolitik Condensed';
   src: url('./assets/fonts/realpolv2c.ttf') format('truetype');
   font-weight: normal;
